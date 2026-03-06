@@ -1,137 +1,474 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pratham R. Bharati | Portfolio</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pratham Bharati | ML Engineer</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+--dark:#0b0c10;--dark-2:#1f2833;--dark-3:#1a1e2e;
+--teal:#66fcf1;--teal-dim:rgba(102,252,241,.1);--teal-glow:rgba(102,252,241,.2);
+--purple:#c678dd;--blue:#61afef;--orange:#e5c07b;--red:#e06c75;--green:#98c379;
+--text:#c5c6c7;--text-bright:#eef0f4;--text-dim:#6b7280;
+--font:'Poppins',sans-serif;--mono:'Fira Code',monospace;
+}
+html{scroll-behavior:smooth}
+body{font-family:var(--font);background:var(--dark);color:var(--text);line-height:1.7;overflow-x:hidden}
+::selection{background:var(--teal);color:var(--dark)}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:0 60px;height:70px;display:flex;align-items:center;justify-content:space-between;background:rgba(11,12,16,.9);backdrop-filter:blur(20px);border-bottom:1px solid rgba(102,252,241,.08)}
+.logo{font-weight:700;font-size:1.3rem;color:var(--teal);text-decoration:none;letter-spacing:-.02em}
+.logo span{color:var(--text-bright)}
+.nav-links{display:flex;gap:28px;align-items:center;list-style:none}
+.nav-links a{font-size:.85rem;color:var(--text);text-decoration:none;font-weight:500;transition:color .3s;position:relative}
+.nav-links a::after{content:'';position:absolute;bottom:-6px;left:0;width:0;height:2px;background:var(--teal);transition:width .3s}
+.nav-links a:hover{color:var(--teal)}
+.nav-links a:hover::after{width:100%}
+.nav-cta{padding:8px 24px;border:2px solid var(--teal);border-radius:6px;color:var(--teal)!important;font-weight:600;transition:all .3s}
+.nav-cta:hover{background:var(--teal);color:var(--dark)!important}
+.nav-cta::after{display:none!important}
+.hamburger{display:none;background:none;border:none;cursor:pointer;padding:4px;z-index:1001}
+.hamburger span{display:block;width:26px;height:2px;background:var(--text-bright);margin:6px 0;transition:all .3s;border-radius:2px}
+.hamburger.active span:nth-child(1){transform:rotate(45deg) translate(6px,6px)}
+.hamburger.active span:nth-child(2){opacity:0}
+.hamburger.active span:nth-child(3){transform:rotate(-45deg) translate(6px,-6px)}
+
+/* HERO */
+.hero{min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;position:relative;overflow:hidden;padding:100px 24px}
+.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse at 20% 50%,rgba(102,252,241,.08)0%,transparent 50%),radial-gradient(ellipse at 80% 20%,rgba(198,120,221,.06)0%,transparent 50%),radial-gradient(ellipse at 50% 80%,rgba(97,175,239,.05)0%,transparent 50%);pointer-events:none}
+.hero-grid{position:absolute;inset:0;pointer-events:none;opacity:.04;background-image:linear-gradient(rgba(102,252,241,.5) 1px,transparent 1px),linear-gradient(90deg,rgba(102,252,241,.5) 1px,transparent 1px);background-size:60px 60px;animation:gridMove 20s linear infinite}
+@keyframes gridMove{0%{transform:translate(0,0)}100%{transform:translate(60px,60px)}}
+.hero-content{position:relative;z-index:1;max-width:800px}
+.hero-greeting{font-family:var(--mono);font-size:1rem;color:var(--teal);font-weight:400;margin-bottom:20px;animation:fadeUp .8s ease both}
+.hero h1{font-size:clamp(2.8rem,6vw,4.5rem);font-weight:800;color:var(--text-bright);letter-spacing:-.03em;line-height:1.1;margin-bottom:12px;animation:fadeUp .8s ease .15s both}
+.hero h2{font-size:clamp(1.2rem,3vw,1.8rem);font-weight:300;color:var(--text-dim);letter-spacing:-.01em;margin-bottom:28px;animation:fadeUp .8s ease .3s both}
+.hero-typed{color:var(--teal);font-weight:600;border-right:2px solid var(--teal);animation:blink 1s step-end infinite}
+@keyframes blink{0%,100%{border-color:var(--teal)}50%{border-color:transparent}}
+.hero-desc{font-size:1.05rem;color:var(--text);max-width:580px;margin:0 auto 40px;line-height:1.8;animation:fadeUp .8s ease .45s both}
+.hero-btns{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;animation:fadeUp .8s ease .6s both}
+.btn{padding:14px 36px;border-radius:8px;font-family:var(--font);font-size:.9rem;font-weight:600;cursor:pointer;text-decoration:none;transition:all .3s;display:inline-flex;align-items:center;gap:8px}
+.btn-filled{background:var(--teal);color:var(--dark);border:2px solid var(--teal)}
+.btn-filled:hover{background:transparent;color:var(--teal);transform:translateY(-2px);box-shadow:0 8px 25px var(--teal-glow)}
+.btn-outline{background:transparent;color:var(--teal);border:2px solid var(--teal)}
+.btn-outline:hover{background:var(--teal-dim);transform:translateY(-2px)}
+.scroll-indicator{position:absolute;bottom:40px;left:50%;transform:translateX(-50%);animation:bounce 2s infinite}
+.scroll-indicator span{display:block;width:24px;height:24px;border-right:2px solid var(--teal);border-bottom:2px solid var(--teal);transform:rotate(45deg);opacity:.5}
+@keyframes bounce{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(12px)}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+
+/* SECTIONS */
+section{padding:100px 60px;position:relative}
+.section-dark{background:var(--dark-3)}
+.section-header{text-align:center;margin-bottom:64px}
+.section-header h2{font-size:clamp(1.8rem,3.5vw,2.5rem);font-weight:700;color:var(--text-bright);letter-spacing:-.02em;margin-bottom:12px}
+.section-header .underline{width:60px;height:3px;background:var(--teal);margin:0 auto;border-radius:2px}
+.section-header p{color:var(--text-dim);font-size:.95rem;margin-top:16px;max-width:500px;margin-left:auto;margin-right:auto}
+
+/* ABOUT */
+.about-grid{display:grid;grid-template-columns:1fr 1.3fr;gap:64px;max-width:1000px;margin:0 auto;align-items:center}
+.about-card{background:linear-gradient(135deg,var(--dark-2),var(--dark-3));border:1px solid rgba(102,252,241,.1);border-radius:16px;padding:40px;text-align:center;position:relative;overflow:hidden}
+.about-card::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--teal),var(--purple),var(--blue))}
+.about-avatar{width:120px;height:120px;border-radius:50%;background:linear-gradient(135deg,var(--teal),var(--blue));display:flex;align-items:center;justify-content:center;font-size:3rem;margin:0 auto 20px;color:var(--dark);font-weight:700}
+.about-card h3{font-size:1.3rem;color:var(--text-bright);margin-bottom:4px}
+.about-card .location{font-size:.85rem;color:var(--teal)}
+.about-card .quick-links{display:flex;gap:12px;justify-content:center;margin-top:24px}
+.about-card .quick-links a{width:40px;height:40px;border-radius:10px;background:rgba(102,252,241,.08);display:flex;align-items:center;justify-content:center;color:var(--text);transition:all .3s;text-decoration:none}
+.about-card .quick-links a:hover{background:var(--teal);color:var(--dark);transform:translateY(-2px)}
+.about-card .quick-links svg{width:18px;height:18px;fill:currentColor}
+.about-text p{margin-bottom:16px;font-size:.95rem;line-height:1.8}
+.about-text .hl{color:var(--teal);font-weight:500}
+.about-text .hl-purple{color:var(--purple);font-weight:500}
+.about-text .hl-blue{color:var(--blue);font-weight:500}
+.about-chips{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}
+.chip{font-family:var(--mono);font-size:.75rem;padding:6px 16px;border-radius:100px;font-weight:500}
+.chip-teal{background:rgba(102,252,241,.1);color:var(--teal);border:1px solid rgba(102,252,241,.2)}
+.chip-purple{background:rgba(198,120,221,.1);color:var(--purple);border:1px solid rgba(198,120,221,.2)}
+.chip-blue{background:rgba(97,175,239,.1);color:var(--blue);border:1px solid rgba(97,175,239,.2)}
+.chip-orange{background:rgba(229,192,123,.1);color:var(--orange);border:1px solid rgba(229,192,123,.2)}
+
+/* EDUCATION */
+.edu-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:24px;max-width:900px;margin:0 auto}
+.edu-card{padding:32px;border-radius:16px;border:1px solid rgba(255,255,255,.06);background:var(--dark);position:relative;overflow:hidden;transition:all .4s}
+.edu-card:hover{transform:translateY(-4px);border-color:rgba(102,252,241,.2)}
+.edu-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px}
+.edu-card:nth-child(1)::before{background:linear-gradient(90deg,var(--teal),var(--blue))}
+.edu-card:nth-child(2)::before{background:linear-gradient(90deg,var(--purple),var(--orange))}
+.edu-emoji{font-size:2rem;margin-bottom:16px}
+.edu-card h3{font-size:1.05rem;color:var(--text-bright);font-weight:600;margin-bottom:6px}
+.edu-card .degree{font-size:.88rem;color:var(--text);margin-bottom:8px}
+.edu-card .edu-meta{font-family:var(--mono);font-size:.75rem;color:var(--text-dim);display:flex;justify-content:space-between;align-items:center}
+.edu-card .gpa{color:var(--teal);font-weight:500}
+
+/* EXPERIENCE */
+.timeline{max-width:800px;margin:0 auto;position:relative;padding-left:40px}
+.timeline::before{content:'';position:absolute;left:15px;top:0;bottom:0;width:2px;background:linear-gradient(180deg,var(--teal),var(--purple),var(--blue));border-radius:2px}
+.timeline-item{position:relative;padding:32px;margin-bottom:24px;background:var(--dark);border:1px solid rgba(255,255,255,.06);border-radius:16px;transition:all .4s}
+.timeline-item:hover{border-color:rgba(102,252,241,.2);transform:translateX(4px)}
+.timeline-dot{position:absolute;left:-33px;top:36px;width:12px;height:12px;border-radius:50%;background:var(--teal);box-shadow:0 0 0 4px var(--dark-3),0 0 12px var(--teal-glow)}
+.timeline-date{font-family:var(--mono);font-size:.75rem;color:var(--teal);margin-bottom:8px}
+.timeline-item h3{font-size:1.1rem;color:var(--text-bright);font-weight:600;margin-bottom:4px}
+.timeline-item h4{font-size:.9rem;color:var(--purple);font-weight:500;margin-bottom:12px}
+.timeline-item p{font-size:.88rem;color:var(--text);line-height:1.8}
+
+/* PROJECTS */
+.projects-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(350px,1fr));gap:24px;max-width:1100px;margin:0 auto}
+.project-card{background:var(--dark-2);border:1px solid rgba(255,255,255,.06);border-radius:16px;overflow:hidden;transition:all .4s;display:flex;flex-direction:column}
+.project-card:hover{transform:translateY(-6px);border-color:rgba(102,252,241,.25);box-shadow:0 20px 40px rgba(0,0,0,.3)}
+.project-banner{height:160px;display:flex;align-items:center;justify-content:center;font-size:3.5rem;position:relative;overflow:hidden}
+.project-banner::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,transparent 50%,var(--dark-2))}
+.project-card:nth-child(1) .project-banner{background:linear-gradient(135deg,#0d2137,#1a3a5c)}
+.project-card:nth-child(2) .project-banner{background:linear-gradient(135deg,#1a1230,#2d1f4e)}
+.project-card:nth-child(3) .project-banner{background:linear-gradient(135deg,#1a2e1a,#2d4a2d)}
+.project-card:nth-child(4) .project-banner{background:linear-gradient(135deg,#2d1a1a,#4a2d2d)}
+.project-card:nth-child(5) .project-banner{background:linear-gradient(135deg,#1a2a30,#2d4a4e)}
+.project-body{padding:28px;flex:1;display:flex;flex-direction:column}
+.project-metric-badge{font-family:var(--mono);font-size:.72rem;font-weight:500;padding:4px 12px;border-radius:100px;display:inline-block;margin-bottom:12px;width:fit-content}
+.badge-teal{background:rgba(102,252,241,.1);color:var(--teal)}
+.badge-purple{background:rgba(198,120,221,.1);color:var(--purple)}
+.badge-blue{background:rgba(97,175,239,.1);color:var(--blue)}
+.badge-red{background:rgba(224,108,117,.1);color:var(--red)}
+.badge-green{background:rgba(152,195,121,.1);color:var(--green)}
+.project-body h3{font-size:1.05rem;font-weight:600;color:var(--text-bright);margin-bottom:8px}
+.project-body h3 a{color:var(--text-bright);text-decoration:none;transition:color .3s}
+.project-body h3 a:hover{color:var(--teal)}
+.project-body p{font-size:.85rem;color:var(--text);line-height:1.7;flex:1;margin-bottom:16px}
+.project-tags{display:flex;flex-wrap:wrap;gap:6px}
+.project-tags span{font-family:var(--mono);font-size:.68rem;padding:3px 10px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:4px;color:var(--text-dim)}
+
+/* CERTIFICATIONS */
+.certs-list{max-width:700px;margin:0 auto}
+.cert-row{display:flex;justify-content:space-between;align-items:center;padding:20px 24px;border-radius:12px;margin-bottom:8px;border:1px solid rgba(255,255,255,.04);background:var(--dark);transition:all .3s;gap:16px}
+.cert-row:hover{border-color:rgba(102,252,241,.15);background:rgba(102,252,241,.03);transform:translateX(4px)}
+.cert-row .cert-icon{font-size:1.5rem;flex-shrink:0}
+.cert-info{flex:1}
+.cert-info h4{font-size:.92rem;font-weight:600;color:var(--text-bright)}
+.cert-info h4 a{color:var(--text-bright);text-decoration:none}
+.cert-info h4 a:hover{color:var(--teal)}
+.cert-info span{font-family:var(--mono);font-size:.72rem;color:var(--teal)}
+.cert-date{font-family:var(--mono);font-size:.75rem;color:var(--text-dim);white-space:nowrap}
+
+/* CONTACT */
+.contact-content{text-align:center;max-width:600px;margin:0 auto}
+.contact-content p{font-size:1.05rem;line-height:1.8;margin-bottom:40px}
+.contact-links{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
+.contact-pill{display:inline-flex;align-items:center;gap:10px;padding:12px 28px;border-radius:100px;border:1px solid rgba(255,255,255,.1);background:var(--dark-2);color:var(--text);text-decoration:none;font-size:.88rem;font-weight:500;transition:all .3s}
+.contact-pill:hover{border-color:var(--teal);color:var(--teal);transform:translateY(-2px)}
+.contact-pill svg{width:18px;height:18px;fill:currentColor}
+
+/* FOOTER */
+footer{padding:40px 60px;text-align:center;border-top:1px solid rgba(255,255,255,.04);font-size:.82rem;color:var(--text-dim)}
+
+/* SCROLL REVEAL */
+.reveal{opacity:0;transform:translateY(40px);transition:opacity .8s ease,transform .8s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+nav{padding:0 24px}
+.nav-links{position:fixed;top:0;right:-100%;width:260px;height:100vh;background:var(--dark-2);flex-direction:column;padding:100px 40px;gap:20px;border-left:1px solid rgba(102,252,241,.1);transition:right .3s}
+.nav-links.open{right:0}
+.hamburger{display:block}
+section{padding:72px 24px}
+.about-grid{grid-template-columns:1fr;gap:32px}
+.projects-grid{grid-template-columns:1fr}
+.edu-cards{grid-template-columns:1fr}
+.timeline{padding-left:32px}
+footer{padding:32px 24px}
+}
+</style>
 </head>
-<body class="bg-gray-50 text-gray-900 font-sans">
+<body>
 
-  <!-- Header / Navbar -->
-  <header class="bg-white shadow-md sticky top-0 z-50">
-    <div class="container mx-auto flex justify-between items-center p-4">
-      <h1 class="text-2xl font-bold">Pratham R. Bharati</h1>
-      <nav class="space-x-6">
-        <a href="#projects" class="hover:text-blue-600">Projects</a>
-        <a href="#skills" class="hover:text-blue-600">Skills</a>
-        <a href="#resume" class="hover:text-blue-600">Resume</a>
-        <a href="#contact" class="hover:text-blue-600">Contact</a>
-      </nav>
-    </div>
-  </header>
+<nav>
+  <a href="#" class="logo"><span>Pratham</span>Bharati</a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#about">About</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#certs">Certifications</a></li>
+    <li><a href="#contact" class="nav-cta">Contact</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
 
-  <!-- Hero / About Me -->
-  <section class="container mx-auto text-center py-12 px-4">
-    <h2 class="text-3xl md:text-4xl font-bold mb-4">Applied Machine Learning Enthusiast</h2>
-    <p class="text-gray-700 max-w-xl mx-auto mb-6">
-      Incoming M.S. in Applied Machine Learning at University of Maryland. Passionate about building AI-powered solutions for real-world problems including NLP, computer vision, and data analytics.
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-content">
+    <div class="hero-greeting">Hi, my name is</div>
+    <h1>Pratham Bharati</h1>
+    <h2>I build <span class="hero-typed" id="typed"></span></h2>
+    <p class="hero-desc">
+      Machine Learning Engineer and Data Scientist pursuing M.S. in Applied ML at the University of Maryland, College Park. I turn complex data into intelligent systems that drive real-world impact.
     </p>
-    <div class="flex justify-center space-x-4">
-      <a href="https://linkedin.com/in/prathambharati" target="_blank" class="text-blue-700 text-2xl"><i class="fab fa-linkedin"></i></a>
-      <a href="https://github.com/prathambharati" target="_blank" class="text-gray-800 text-2xl"><i class="fab fa-github"></i></a>
-      <a href="mailto:pratham.bharati03@gmail.com" class="text-red-600 text-2xl"><i class="fas fa-envelope"></i></a>
+    <div class="hero-btns">
+      <a href="#projects" class="btn btn-filled">View My Work</a>
+      <a href="mailto:pratham.bharati03@gmail.com" class="btn btn-outline">Get In Touch</a>
     </div>
-  </section>
+  </div>
+  <div class="scroll-indicator"><span></span></div>
+</section>
 
-  <!-- Projects -->
-  <section id="projects" class="container mx-auto py-12 px-4">
-    <h2 class="text-2xl font-bold mb-6 border-b-2 border-blue-600 inline-block">Projects</h2>
-    <div class="grid md:grid-cols-2 gap-8">
-      
-      <!-- Project Card -->
-      <div class="bg-white shadow-md rounded-lg p-6 hover:shadow-xl transition">
-        <h3 class="font-bold text-xl mb-2">Cyberbullying Detection</h3>
-        <p class="text-gray-700 mb-2">Hybrid CNN-BiLSTM + Ensemble model achieved 91% accuracy for offensive content detection. Real-time moderation dashboard with face recognition + multi-factor authentication.</p>
-        <div class="flex space-x-2 text-sm text-gray-600 mb-2">
-          <span class="bg-gray-200 px-2 py-1 rounded">Python</span>
-          <span class="bg-gray-200 px-2 py-1 rounded">NLP</span>
-          <span class="bg-gray-200 px-2 py-1 rounded">Deep Learning</span>
+<!-- ABOUT -->
+<section id="about" class="section-dark">
+  <div class="section-header reveal"><h2>About Me</h2><div class="underline"></div></div>
+  <div class="about-grid reveal">
+    <div class="about-visual">
+      <div class="about-card">
+        <div class="about-avatar">PB</div>
+        <h3>Pratham Bharati</h3>
+        <div class="location">College Park, MD</div>
+        <div class="quick-links">
+          <a href="https://github.com/prathambharati" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+            <svg viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+          </a>
+          <a href="https://www.linkedin.com/in/pratham-bharati/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+            <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+          </a>
+          <a href="mailto:pratham.bharati03@gmail.com" aria-label="Email">
+            <svg viewBox="0 0 24 24"><path d="M1.5 8.67v8.58a3 3 0 003 3h15a3 3 0 003-3V8.67l-8.928 5.493a3 3 0 01-3.144 0L1.5 8.67z"/><path d="M22.5 6.908V6.75a3 3 0 00-3-3h-15a3 3 0 00-3 3v.158l9.714 5.978a1.5 1.5 0 001.572 0L22.5 6.908z"/></svg>
+          </a>
         </div>
-      </div>
-
-      <div class="bg-white shadow-md rounded-lg p-6 hover:shadow-xl transition">
-        <h3 class="font-bold text-xl mb-2">Concrete Compressive Strength Prediction</h3>
-        <p class="text-gray-700 mb-2">Regression models evaluated on 1030+ samples. Used LIME & SHAP for interpretability. Delivered insights for construction quality, durability, and sustainability.</p>
-        <div class="flex space-x-2 text-sm text-gray-600 mb-2">
-          <span class="bg-gray-200 px-2 py-1 rounded">Python</span>
-          <span class="bg-gray-200 px-2 py-1 rounded">ML</span>
-          <span class="bg-gray-200 px-2 py-1 rounded">XAI</span>
-        </div>
-      </div>
-
-      <div class="bg-white shadow-md rounded-lg p-6 hover:shadow-xl transition">
-        <h3 class="font-bold text-xl mb-2">Stroke Prediction using ML</h3>
-        <p class="text-gray-700 mb-2">Predictive models with Logistic Regression, Random Forest, and Gradient Boosting. Feature importance analysis for early intervention and clinical guidance.</p>
-        <div class="flex space-x-2 text-sm text-gray-600 mb-2">
-          <span class="bg-gray-200 px-2 py-1 rounded">Python</span>
-          <span class="bg-gray-200 px-2 py-1 rounded">ML</span>
-          <span class="bg-gray-200 px-2 py-1 rounded">Data Analysis</span>
-        </div>
-      </div>
-
-      <div class="bg-white shadow-md rounded-lg p-6 hover:shadow-xl transition">
-        <h3 class="font-bold text-xl mb-2">AI Video Summarizer</h3>
-        <p class="text-gray-700 mb-2">End-to-end video summarization using Whisper, BLIP, and GPT models. Generates story-like summaries and deployed on Hugging Face Spaces.</p>
-        <div class="flex space-x-2 text-sm text-gray-600 mb-2">
-          <span class="bg-gray-200 px-2 py-1 rounded">Python</span>
-          <span class="bg-gray-200 px-2 py-1 rounded">NLP</span>
-          <span class="bg-gray-200 px-2 py-1 rounded">Computer Vision</span>
-        </div>
-      </div>
-
-      <div class="bg-white shadow-md rounded-lg p-6 hover:shadow-xl transition">
-        <h3 class="font-bold text-xl mb-2">PDF Summarizer & Q/A Chatbot</h3>
-        <p class="text-gray-700 mb-2">Streamlit app for summarizing PDFs and answering queries using LangChain + OpenAI APIs. FAISS-based semantic search for 1000+ page docs.</p>
-        <div class="flex space-x-2 text-sm text-gray-600 mb-2">
-          <span class="bg-gray-200 px-2 py-1 rounded">Python</span>
-          <span class="bg-gray-200 px-2 py-1 rounded">LangChain</span>
-          <span class="bg-gray-200 px-2 py-1 rounded">OpenAI</span>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- Skills -->
-  <section id="skills" class="container mx-auto py-12 px-4">
-    <h2 class="text-2xl font-bold mb-6 border-b-2 border-blue-600 inline-block">Skills</h2>
-    <div class="grid md:grid-cols-2 gap-4 text-gray-700">
-      <div>
-        <h3 class="font-semibold mb-1">Programming:</h3>
-        <p>Python, Java, C, C++, SQL, R, MATLAB</p>
-      </div>
-      <div>
-        <h3 class="font-semibold mb-1">ML & AI:</h3>
-        <p>Scikit-learn, TensorFlow, PyTorch, OpenAI APIs, LangChain, BLIP, Whisper, NLP, Computer Vision, XAI (LIME, SHAP)</p>
-      </div>
-      <div>
-        <h3 class="font-semibold mb-1">Data & Visualization:</h3>
-        <p>Pandas, NumPy, Matplotlib, Seaborn, Plotly, SQL</p>
-      </div>
-      <div>
-        <h3 class="font-semibold mb-1">Tools & Platforms:</h3>
-        <p>MySQL, Git/GitHub, Docker, Streamlit, FastAPI, Hugging Face Spaces, Postman, AWS/GCP basics</p>
       </div>
     </div>
-  </section>
+    <div class="about-text">
+      <p>I'm a <span class="hl">machine learning engineer</span> who loves the full cycle, from framing the problem and wrangling messy data, to training models and shipping tools that <span class="hl-purple">non-technical stakeholders</span> can actually use.</p>
+      <p>At <span class="hl">GoodWorkLabs</span>, I built LLM-powered pipelines and analytics dashboards that put ML insights directly into the hands of product teams. My work spans <span class="hl-blue">NLP, retrieval-augmented generation, deep learning,</span> and <span class="hl-purple">explainable AI</span>.</p>
+      <p>Currently at <span class="hl">UMD College Park</span>, I'm deepening my expertise in applied ML while actively seeking opportunities to solve impactful problems.</p>
+      <div class="about-chips">
+        <span class="chip chip-teal">Python</span>
+        <span class="chip chip-purple">PyTorch</span>
+        <span class="chip chip-blue">TensorFlow</span>
+        <span class="chip chip-orange">LangChain</span>
+        <span class="chip chip-teal">Scikit-learn</span>
+        <span class="chip chip-purple">OpenAI APIs</span>
+        <span class="chip chip-blue">RAG</span>
+        <span class="chip chip-orange">Docker</span>
+      </div>
+    </div>
+  </div>
+</section>
 
-  <!-- Resume -->
-  <section id="resume" class="container mx-auto py-12 px-4 text-center">
-    <h2 class="text-2xl font-bold mb-6 border-b-2 border-blue-600 inline-block">Resume</h2>
-    <p class="mb-4">Download my one-page resume for detailed experience and projects.</p>
-    <a href="Pratham_Bharati_Resume.pdf" class="bg-blue-600 text-white px-6 py-3 rounded shadow hover:bg-blue-700 transition" target="_blank">
-      <i class="fas fa-download mr-2"></i>Download Resume
-    </a>
-  </section>
+<!-- EDUCATION -->
+<section id="education">
+  <div class="section-header reveal"><h2>Education</h2><div class="underline"></div></div>
+  <div class="edu-cards reveal">
+    <div class="edu-card">
+      <div class="edu-emoji">&#127891;</div>
+      <h3>University of Maryland, College Park</h3>
+      <div class="degree">M.S., Applied Machine Learning</div>
+      <div class="edu-meta"><span>Aug 2025 - May 2027</span><span>College Park, MD</span></div>
+    </div>
+    <div class="edu-card">
+      <div class="edu-emoji">&#127979;</div>
+      <h3>Global Academy of Technology</h3>
+      <div class="degree">B.E., Information Science &amp; Engineering</div>
+      <div class="edu-meta"><span>Aug 2021 - May 2025</span><span class="gpa">GPA: 8.86/10</span></div>
+    </div>
+  </div>
+</section>
 
-  <!-- Contact -->
-  <section id="contact" class="container mx-auto py-12 px-4 text-center">
-    <h2 class="text-2xl font-bold mb-6 border-b-2 border-blue-600 inline-block">Contact</h2>
-    <p class="mb-4">Feel free to reach out for collaborations, internships, or questions.</p>
-    <p>Email: <a href="mailto:pratham.bharati03@gmail.com" class="text-blue-600">pratham.bharati03@gmail.com</a></p>
-  </section>
+<!-- EXPERIENCE -->
+<section id="experience" class="section-dark">
+  <div class="section-header reveal"><h2>Work Experience</h2><div class="underline"></div></div>
+  <div class="timeline reveal">
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-date">Apr 2025 - Jun 2025 | Bangalore, India</div>
+      <h3>Data Science &amp; AI Intern</h3>
+      <h4>GoodWorkLabs</h4>
+      <p>Engineered OpenAI API-powered LLM pipelines for automated text summarization. Built interactive analytics dashboards using Streamlit and FastAPI. Automated model deployment via CI/CD on Hugging Face Spaces. Partnered with PMs to define KPIs and validate production benchmarks.</p>
+      <div class="about-chips" style="margin-top:16px">
+        <span class="chip chip-teal">OpenAI APIs</span>
+        <span class="chip chip-purple">Streamlit</span>
+        <span class="chip chip-blue">FastAPI</span>
+        <span class="chip chip-orange">Hugging Face</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-header reveal"><h2>Projects</h2><div class="underline"></div><p>A selection of things I've built</p></div>
+  <div class="projects-grid reveal">
+
+    <div class="project-card">
+      <div class="project-banner">&#128269;</div>
+      <div class="project-body">
+        <span class="project-metric-badge badge-teal">14.4% degradation uncovered</span>
+        <h3>RAG Failure Analysis Under Imperfect Retrieval</h3>
+        <p>End-to-end RAG pipeline with TF-IDF retrieval benchmarking against no-RAG baselines across 90 ML questions. Exposed critical failure modes and proposed hybrid fallback strategies.</p>
+        <div class="project-tags"><span>Python</span><span>OpenAI API</span><span>Scikit-learn</span><span>RAG</span></div>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-banner">&#128737;&#65039;</div>
+      <div class="project-body">
+        <span class="project-metric-badge badge-purple">34% to 65% recall</span>
+        <h3><a href="https://github.com/prathambharati/Robust-LLM-Authorship-Detection" target="_blank" rel="noopener noreferrer">Robust LLM Authorship Detection &#8599;</a></h3>
+        <p>Leakage-free NLP classification with prompt-grouped splits to evaluate AI text detection robustness. Tuned thresholds to reduce false positives for educational integrity.</p>
+        <div class="project-tags"><span>NLP</span><span>TF-IDF</span><span>Logistic Regression</span><span>Scikit-learn</span></div>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-banner">&#9889;</div>
+      <div class="project-body">
+        <span class="project-metric-badge badge-green">91% accuracy</span>
+        <h3>Cyberbullying Detection Dashboard</h3>
+        <p>Hybrid deep learning NLP model for multi-class offensive content classification. Real-time content moderation dashboard with live toxicity scoring.</p>
+        <div class="project-tags"><span>PyTorch</span><span>Deep Learning</span><span>NLP</span><span>Streamlit</span></div>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-banner">&#10084;&#65039;</div>
+      <div class="project-body">
+        <span class="project-metric-badge badge-red">99.3% accuracy</span>
+        <h3><a href="https://github.com/prathambharati/Heart-Disease-Risk-Prediction-Using-Machine-Learning" target="_blank" rel="noopener noreferrer">Heart Disease Risk Prediction &#8599;</a></h3>
+        <p>Benchmarked classifiers on a 70K-sample dataset with Simpson's Paradox analysis, 5-fold cross-validation, and PCA for healthcare decision support.</p>
+        <div class="project-tags"><span>Random Forest</span><span>EDA</span><span>Cross-Validation</span><span>PCA</span></div>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-banner">&#128167;</div>
+      <div class="project-body">
+        <span class="project-metric-badge badge-blue">IEEE INDISCON 2024</span>
+        <h3>Predicting Concrete Compressive Strength</h3>
+        <p>Built and compared supervised regression models using SHAP and LIME to quantify feature contributions. Identified water-cement ratio and age as top predictors. Published at IEEE INDISCON 2024.</p>
+        <div class="project-tags"><span>SHAP</span><span>LIME</span><span>Regression</span><span>Scikit-learn</span><span>IEEE</span></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- CERTIFICATIONS -->
+<section id="certs" class="section-dark">
+  <div class="section-header reveal"><h2>Certifications</h2><div class="underline"></div></div>
+  <div class="certs-list reveal">
+    <div class="cert-row">
+      <div class="cert-icon">&#127941;</div>
+      <div class="cert-info">
+        <h4><a href="https://learn.deeplearning.ai/certificates/4a9b4803-8e64-4e66-9569-fcb36a8054e5" target="_blank" rel="noopener noreferrer">Generative AI with Large Language Models &#8599;</a></h4>
+        <span>DeepLearning.AI</span>
+      </div>
+      <div class="cert-date">Mar 2026</div>
+    </div>
+    <div class="cert-row">
+      <div class="cert-icon">&#127941;</div>
+      <div class="cert-info">
+        <h4><a href="https://learn.deeplearning.ai/certificates/9bba676c-d4f4-4e49-bb4d-64d42c3355cf" target="_blank" rel="noopener noreferrer">NLP with Classification &amp; Vector Spaces &#8599;</a></h4>
+        <span>DeepLearning.AI</span>
+      </div>
+      <div class="cert-date">Feb 2026</div>
+    </div>
+    <div class="cert-row">
+      <div class="cert-icon">&#127941;</div>
+      <div class="cert-info">
+        <h4><a href="https://learn.deeplearning.ai/certificates/ab4e2ec2-c49c-498d-8c68-e1b5fd5114be" target="_blank" rel="noopener noreferrer">Retrieval Augmented Generation (RAG) &#8599;</a></h4>
+        <span>DeepLearning.AI</span>
+      </div>
+      <div class="cert-date">Feb 2026</div>
+    </div>
+    <div class="cert-row">
+      <div class="cert-icon">&#127941;</div>
+      <div class="cert-info">
+        <h4><a href="https://learn.deeplearning.ai/certificates/db186767-a6a2-45ed-93e1-53b0b0d5cc65" target="_blank" rel="noopener noreferrer">AI Python for Beginners &#8599;</a></h4>
+        <span>DeepLearning.AI</span>
+      </div>
+      <div class="cert-date">Feb 2026</div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-header reveal"><h2>Get In Touch</h2><div class="underline"></div></div>
+  <div class="contact-content reveal">
+    <p>I'm currently looking for internship and full-time opportunities in ML/AI and Data Science. Whether you have a question or just want to say hi, I'll do my best to get back to you!</p>
+    <div class="contact-links">
+      <a href="mailto:pratham.bharati03@gmail.com" class="contact-pill">
+        <svg viewBox="0 0 24 24"><path d="M1.5 8.67v8.58a3 3 0 003 3h15a3 3 0 003-3V8.67l-8.928 5.493a3 3 0 01-3.144 0L1.5 8.67z"/><path d="M22.5 6.908V6.75a3 3 0 00-3-3h-15a3 3 0 00-3 3v.158l9.714 5.978a1.5 1.5 0 001.572 0L22.5 6.908z"/></svg>
+        Email
+      </a>
+      <a href="https://www.linkedin.com/in/pratham-bharati/" target="_blank" rel="noopener noreferrer" class="contact-pill">
+        <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+        LinkedIn
+      </a>
+      <a href="https://github.com/prathambharati" target="_blank" rel="noopener noreferrer" class="contact-pill">
+        <svg viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+        GitHub
+      </a>
+      <a href="tel:+12272057404" class="contact-pill">
+        <svg viewBox="0 0 24 24"><path d="M6.62 10.79a15.053 15.053 0 006.59 6.59l2.2-2.2a1 1 0 011.01-.24c1.12.37 2.33.57 3.57.57a1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.25.2 2.45.57 3.57a1 1 0 01-.25 1.02l-2.2 2.2z"/></svg>
+        Phone
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>&#169; 2026 Pratham Bharati</footer>
+
+<script>
+// Hamburger
+var hb = document.getElementById('hamburger');
+var nl = document.getElementById('navLinks');
+hb.addEventListener('click', function() {
+  hb.classList.toggle('active');
+  nl.classList.toggle('open');
+});
+var allLinks = nl.querySelectorAll('a');
+for (var i = 0; i < allLinks.length; i++) {
+  allLinks[i].addEventListener('click', function() {
+    hb.classList.remove('active');
+    nl.classList.remove('open');
+  });
+}
+
+// Scroll reveal
+var revealEls = document.querySelectorAll('.reveal');
+var revealObs = new IntersectionObserver(function(entries) {
+  for (var j = 0; j < entries.length; j++) {
+    if (entries[j].isIntersecting) entries[j].target.classList.add('visible');
+  }
+}, { threshold: 0.1 });
+for (var k = 0; k < revealEls.length; k++) revealObs.observe(revealEls[k]);
+
+// Typing effect
+var phrases = ['intelligent ML systems.', 'NLP pipelines.', 'data-driven solutions.', 'production AI tools.'];
+var typedEl = document.getElementById('typed');
+var pIdx = 0, cIdx = 0, isDel = false;
+
+function typeLoop() {
+  var cur = phrases[pIdx];
+  typedEl.textContent = cur.substring(0, cIdx);
+  if (!isDel && cIdx < cur.length) {
+    cIdx++;
+    setTimeout(typeLoop, 70);
+  } else if (!isDel && cIdx === cur.length) {
+    setTimeout(function() { isDel = true; typeLoop(); }, 2000);
+  } else if (isDel && cIdx > 0) {
+    cIdx--;
+    setTimeout(typeLoop, 40);
+  } else {
+    isDel = false;
+    pIdx = (pIdx + 1) % phrases.length;
+    setTimeout(typeLoop, 500);
+  }
+}
+typeLoop();
+</script>
 
 </body>
 </html>
